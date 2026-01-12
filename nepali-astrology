@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <title>नेपाली ज्योतिष भविष्यवाणी</title>
+  <style>
+    body { font-family: Mangal, Kalimati, Arial, sans-serif; background:#f4f6f8; padding:20px; }
+    .box { max-width:600px; margin:auto; background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    h1 { text-align:center; color:#7b2cbf; }
+    input, button { width:100%; padding:10px; margin-top:10px; font-size:16px; }
+    button { background:#7b2cbf; color:white; border:none; border-radius:5px; cursor:pointer; }
+    button:hover { background:#5a189a; }
+    .result { margin-top:20px; padding:15px; background:#f1f1f1; border-radius:8px; white-space:pre-line; }
+    .note { font-size:12px; color:#666; margin-top:15px; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>🔮 नेपाली ज्योतिष भविष्यवाणी</h1>
+
+  <label>नाम लेख्नुहोस्:</label>
+  <input type="text" id="name" placeholder="तपाईंको नाम">
+
+  <label>जन्म मिति:</label>
+  <input type="date" id="dob">
+
+  <button onclick="predict()">भविष्य हेर्नुहोस्</button>
+
+  <div class="result" id="result"></div>
+
+  <div class="note">⚠️ यो भविष्यवाणी ज्योतिष तथा आत्म‑परामर्शको लागि मात्र हो।</div>
+</div>
+
+<script>
+function predict() {
+  let name = document.getElementById('name').value;
+  let dob = document.getElementById('dob').value;
+
+  if(name === '' || dob === '') {
+    alert('कृपया नाम र जन्म मिति भर्नुहोस्');
+    return;
+  }
+
+  let sum = dob.replaceAll('-', '').split('').reduce((a,b)=>a+Number(b),0);
+  while(sum > 9) {
+    sum = sum.toString().split('').reduce((a,b)=>a+Number(b),0);
+  }
+
+  let prediction = {
+    1: 'नेतृत्व क्षमता बलियो हुन्छ। नयाँ अवसर आउने संकेत छ।',
+    2: 'सम्बन्ध र सहकार्यले भविष्य निर्माण गर्नेछ।',
+    3: 'रचनात्मक कामबाट सफलता मिल्नेछ।',
+    4: 'मेहनत र धैर्यले स्थिर प्रगति हुनेछ।',
+    5: 'परिवर्तन, यात्रा र नयाँ अनुभव देखिन्छ।',
+    6: 'परिवार र भावनात्मक सन्तुलन महत्वपूर्ण हुनेछ।',
+    7: 'ज्ञान, अध्ययन र आध्यात्मिक उन्नति।',
+    8: 'आर्थिक प्रगति र जिम्मेवारी बढ्नेछ।',
+    9: 'पुराना कुरा समाप्त भई नयाँ सुरुवात।'
+  };
+
+  document.getElementById('result').innerText =
+    'नमस्ते ' + name + ',\n\n' +
+    '🔢 जीवन अंक: ' + sum + '\n\n' +
+    '📜 भविष्यवाणी:\n' + prediction[sum];
+}
+</script>
+
+</body>
+</html>
